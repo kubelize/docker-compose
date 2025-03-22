@@ -21,9 +21,9 @@ services:
       - "443:443"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./traefik.yml:/etc/traefik/traefik.yml"
-      - "./letsencrypt:/letsencrypt"
-      - "./config:/etc/traefik"
+      - "./traefik.yml:/etc/traefik/traefik.yml"  # Mount traefik.yml
+      - "./dynamic.yml:/etc/traefik/dynamic.yml"  # Mount dynamic.yml
+      - "./letsencrypt:/letsencrypt"  # Directory to store Let's Encrypt certificates
     networks:
       - traefik
 
