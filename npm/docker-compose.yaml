@@ -8,6 +8,8 @@ services:
       - '443:443' # Public HTTPS Port
       - '81:81' # Admin Web Port
       - '25565:25565' # Minecraft
+      - '42069:42069' # Minecraft ATM9
+      - '33334:33334' # PaperMC Testing
       # Add any other Stream port you want to expose
       # - '21:21' # FTP
 
