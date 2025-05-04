@@ -7,9 +7,9 @@ services:
       - '80:80' # Public HTTP Port
       - '443:443' # Public HTTPS Port
       - '81:81' # Admin Web Port
-      - '25565:25565' # Minecraft
-      - '42069:42069' # Minecraft ATM9
-      - '33334:33334' # PaperMC Testing
+      - '25565:25565' # icykhaye community minecraft server
+      - '42069:42069' # minecraft atm9 server
+      - '33333:33333' # vanilla minecraft server
       # Add any other Stream port you want to expose
       # - '21:21' # FTP
 
