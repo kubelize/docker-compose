@@ -1,16 +1,17 @@
-crowdsec:
-  <<: *common-keys-core # See EXTENSION FIELDS at the top
-  image: crowdsecurity/crowdsec
-  container_name: crowdsec
-  ports:
-    - "$CROWDSEC_API_PORT:8080"
-    # - "$CROWDSEC_PROMETHEUS_EXPORT:6060" # For metrics export to Prometheus database.
-  environment:
-    COLLECTIONS: "crowdsecurity/http-cve crowdsecurity/whitelist-good-actors crowdsecurity/iptables crowdsecurity/linux crowdsecurity/sshd"
-    GID: "${GID-1000}"
-    CUSTOM_HOSTNAME: kubelize-docker
-  volumes:
-    - $DOCKERDIR/logs/web:/logs/web:ro
-    - /var/log:/var/log:ro
-    - $DOCKERDIR/appdata/crowdsec/data:/var/lib/crowdsec/data
-    - $DOCKERDIR/appdata/crowdsec/config:/etc/crowdsec
+services:  
+  crowdsec:
+    image: crowdsecurity/crowdsec
+    restart: unless-stopped
+    container_name: crowdsec
+    ports:
+      - "$CROWDSEC_API_PORT:8080"
+      # - "$CROWDSEC_PROMETHEUS_EXPORT:6060" # For metrics export to Prometheus database.
+    environment:
+      COLLECTIONS: "crowdsecurity/http-cve crowdsecurity/whitelist-good-actors crowdsecurity/iptables crowdsecurity/linux crowdsecurity/sshd"
+      GID: "${GID-1000}"
+      CUSTOM_HOSTNAME: kubelize-docker
+    volumes:
+      - $DOCKERDIR/logs/web:/logs/web:ro
+      - /var/log:/var/log:ro
+      - $DOCKERDIR/appdata/crowdsec/data:/var/lib/crowdsec/data
+      - $DOCKERDIR/appdata/crowdsec/config:/etc/crowdsec
