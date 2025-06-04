@@ -8,6 +8,7 @@ services:
       - '443:443' # Public HTTPS Port
       - '81:81' # Admin Web Port
       - '25565:25565' # icykhaye community minecraft server
+      - '24454:24454' # icykhaye community minecraft server voip
       - '42069:42069' # minecraft atm9 server
       - '33333:33333' # vanilla minecraft server
       - '33334:33334' # wildcard minecraft server
