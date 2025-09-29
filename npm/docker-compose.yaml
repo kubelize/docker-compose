@@ -1,9 +1,9 @@
 services:
   app:
     image: 'jc21/nginx-proxy-manager:latest'
-    environment:
-      PUID: 1000
-      PGID: 1000
+    user: "1000:1000"
+    cap_add:
+      - NET_BIND_SERVICE
     restart: unless-stopped
     ports:
       # These ports are in format <host-port>:<container-port>
