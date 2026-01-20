@@ -12,6 +12,7 @@ services:
       - '42069:42069' # minecraft atm9 server
       - '33333:33333' # vanilla minecraft server
       - '33334:33334' # wildcard minecraft server
+      - '5520:5520/udp' # hytale server
       # Add any other Stream port you want to expose
       # - '21:21' # FTP
 
