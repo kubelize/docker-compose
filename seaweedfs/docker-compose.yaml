@@ -1,0 +1,29 @@
+services:
+  seaweedfs:
+    image: chrislusf/seaweedfs:3.95
+    container_name: seaweedfs
+    user: "1000:1000"
+    command:
+      - server
+      - -dir=/data
+      - -s3
+      - -s3.port=8333
+      - -s3.config=/etc/seaweedfs/s3.conf
+      - -master.port=9333
+      - -filer.port=8888
+      - -volumeSizeLimitMB=16384
+      - -ip.bind=0.0.0.0
+    environment:
+      TZ: UTC
+    volumes:
+      - /home/core/seaweedfs/data:/data
+      - ./s3.conf:/etc/seaweedfs/s3.conf:ro
+    ports:
+      - "9000:8333"  # S3 API (replacement for MinIO :9000)
+      - "9001:9333"  # SeaweedFS admin UI (replacement for MinIO console :9001)
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O- http://localhost:9333/cluster/status >/dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
