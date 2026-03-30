@@ -11,7 +11,7 @@ services:
       - -s3.config=/etc/seaweedfs/s3.conf
       - -master.port=9333
       - -filer.port=8888
-      - -volumeSizeLimitMB=16384
+      - -master.volumeSizeLimitMB=16384
       - -ip.bind=0.0.0.0
     environment:
       TZ: UTC
