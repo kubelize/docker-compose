@@ -1,5 +1,5 @@
-core.arpa:53 {
-    file /zones/db.core.arpa
+internal:53 {
+    file /zones/db.internal
     log
     errors
 }

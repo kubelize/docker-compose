@@ -1,0 +1,24 @@
+$ORIGIN internal.
+$TTL 3600
+
+@       IN SOA ns1.internal. admin.internal. (
+            2026033001 ; serial
+            3600       ; refresh
+            900        ; retry
+            1209600    ; expire
+            3600       ; minimum
+)
+
+        IN NS  ns1.internal.
+
+ns1             IN A   10.130.5.3
+dns             IN A   10.130.5.3
+
+vault           IN A   10.130.5.239
+homeassistant   IN A   10.130.5.233
+conan           IN A   10.130.5.236
+go2rtc          IN A   10.130.5.234
+pinchflat       IN A   10.130.5.232
+sdtd            IN A   10.130.5.237
+zigbee          IN A   10.130.5.231
+
