@@ -1,0 +1,18 @@
+core.arpa:53 {
+    file /zones/db.core.arpa
+    log
+    errors
+}
+
+home:53 {
+    forward . 10.130.5.1
+    log
+    errors
+}
+
+.:53 {
+    forward . 10.130.5.1
+    cache 300
+    log
+    errors
+}

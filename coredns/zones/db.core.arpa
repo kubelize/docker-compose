@@ -1,0 +1,18 @@
+$ORIGIN core.arpa.
+$TTL 3600
+
+@       IN SOA ns1.core.arpa. admin.core.arpa. (
+            2026033001 ; serial
+            3600       ; refresh
+            900        ; retry
+            1209600    ; expire
+            3600       ; minimum
+)
+
+        IN NS  ns1.core.arpa.
+
+ns1             IN A   10.130.5.3
+dns             IN A   10.130.5.3
+
+vault           IN A   10.130.5.239
+homeassistant   IN A   10.130.5.233
