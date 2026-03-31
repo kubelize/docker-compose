@@ -11,7 +11,7 @@ services:
       - ./data:/etc/wireguard
       - /lib/modules:/lib/modules:ro
     ports:
-      - "51822:51820/udp"
+      - "51822:51822/udp"
       - "80:51821/tcp"
     cap_add:
       - NET_ADMIN
