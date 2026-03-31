@@ -4,12 +4,8 @@ services:
     container_name: wg-easy
     restart: unless-stopped
     environment:
-      # Public IP or DNS name clients should connect to
-      - WG_HOST=YOUR_PUBLIC_IP_OR_DOMAIN
-      # Generate with: docker run --rm ghcr.io/wg-easy/wg-easy:15 wgpw 'your-password'
-      - PASSWORD_HASH=YOUR_BCRYPT_PASSWORD_HASH
-      - WG_DEFAULT_DNS=10.130.5.3
-      - WG_PORT=51820
+      # Needed when accessing the UI over plain HTTP (no reverse proxy/TLS)
+      - INSECURE=true
       - PORT=51821
     volumes:
       - ./data:/etc/wireguard
