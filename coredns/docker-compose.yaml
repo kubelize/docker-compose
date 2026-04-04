@@ -4,7 +4,8 @@ services:
     container_name: bind9
     restart: unless-stopped
     network_mode: host
-    privileged: true
+    cap_add:
+      - NET_BIND_SERVICE
     entrypoint: ["/entrypoint.sh"]
     environment:
       - RFC2136_TSIG_SECRET=${RFC2136_TSIG_SECRET}
