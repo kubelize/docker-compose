@@ -5,4 +5,4 @@ set -eu
 
 printf 'key "externaldns-key" {\n    algorithm hmac-sha256;\n    secret "%s";\n};\n' "${RFC2136_TSIG_SECRET}" > /tmp/externaldns.key
 
-exec named -u 1000 -c /etc/bind/named.conf -g
+exec named -c /etc/bind/named.conf -g
