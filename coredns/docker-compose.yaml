@@ -5,11 +5,15 @@ services:
     user: "1000:1000"
     restart: unless-stopped
     network_mode: host
-    entrypoint: ["/bin/sh", "-ec"]
-    command: |
-      : "$${RFC2136_TSIG_SECRET:?RFC2136_TSIG_SECRET is required}"
-      printf 'key "externaldns-key" {\n    algorithm hmac-sha256;\n    secret "%s";\n};\n' "$${RFC2136_TSIG_SECRET}" > /tmp/externaldns.key
-      exec named -u 1000 -c /etc/bind/named.conf -g
+    cap_add:
+      - NET_BIND_SERVICE
+    command:
+      - /bin/sh
+      - -ec
+      - |
+        : "$${RFC2136_TSIG_SECRET:?RFC2136_TSIG_SECRET is required}"
+        printf 'key "externaldns-key" {\n    algorithm hmac-sha256;\n    secret "%s";\n};\n' "$${RFC2136_TSIG_SECRET}" > /tmp/externaldns.key
+        exec named -u 1000 -c /etc/bind/named.conf -g
     environment:
       - RFC2136_TSIG_SECRET=${RFC2136_TSIG_SECRET}
     volumes:
