@@ -9,4 +9,8 @@ mkdir -p /run/named
 chown bind:bind /run/named
 chmod 0775 /run/named
 
+echo "=== GENERATED KEY FILE ==="
+cat /tmp/externaldns.key
+echo "=========================="
+
 exec named -u bind -c /etc/bind/named.conf -g
