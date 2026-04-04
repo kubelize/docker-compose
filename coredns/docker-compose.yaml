@@ -5,7 +5,7 @@ services:
     user: "1000:1000"
     restart: unless-stopped
     network_mode: host
-    command: -c /etc/bind/named.conf -g
+    command: -u 1000 -c /etc/bind/named.conf -g
     volumes:
       - ./named.conf:/etc/bind/named.conf:ro
       - ./zones:/zones
