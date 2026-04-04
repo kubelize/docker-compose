@@ -1,10 +1,11 @@
 services:
-  coredns:
-    image: coredns/coredns:latest
-    container_name: coredns
+  bind9:
+    image: internetsystemsconsortium/bind9:9.20
+    container_name: bind9
+    user: "1000:1000"
     restart: unless-stopped
     network_mode: host
-    command: -conf /etc/coredns/Corefile
+    command: -c /etc/bind/named.conf -g
     volumes:
-      - ./Corefile:/etc/coredns/Corefile:ro
-      - ./zones:/zones:ro
+      - ./named.conf:/etc/bind/named.conf:ro
+      - ./zones:/zones
