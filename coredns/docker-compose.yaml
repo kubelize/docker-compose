@@ -7,11 +7,16 @@ services:
     network_mode: host
     entrypoint: ["/bin/sh", "-ec"]
     command: |
-      : "${RFC2136_TSIG_SECRET:?RFC2136_TSIG_SECRET is required}"
-      sed "s|\${RFC2136_TSIG_SECRET}|${RFC2136_TSIG_SECRET}|g" /etc/bind/named.conf.template > /tmp/named.conf
-      exec named -u 1000 -c /tmp/named.conf -g
+      : "$${RFC2136_TSIG_SECRET:?RFC2136_TSIG_SECRET is required}"
+      cat > /tmp/externaldns.key <<EOF
+      key "externaldns-key" {
+          algorithm hmac-sha256;
+          secret "$${RFC2136_TSIG_SECRET}";
+      };
+      EOF
+      exec named -u 1000 -c /etc/bind/named.conf -g
     environment:
       - RFC2136_TSIG_SECRET=${RFC2136_TSIG_SECRET}
     volumes:
-      - ./named.conf:/etc/bind/named.conf.template:ro
+      - ./named.conf:/etc/bind/named.conf:ro
       - ./zones:/zones
