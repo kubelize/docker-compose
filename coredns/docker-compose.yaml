@@ -8,12 +8,7 @@ services:
     entrypoint: ["/bin/sh", "-ec"]
     command: |
       : "$${RFC2136_TSIG_SECRET:?RFC2136_TSIG_SECRET is required}"
-      cat > /tmp/externaldns.key <<EOF
-      key "externaldns-key" {
-          algorithm hmac-sha256;
-          secret "$${RFC2136_TSIG_SECRET}";
-      };
-      EOF
+      printf 'key "externaldns-key" {\n    algorithm hmac-sha256;\n    secret "%s";\n};\n' "$${RFC2136_TSIG_SECRET}" > /tmp/externaldns.key
       exec named -u 1000 -c /etc/bind/named.conf -g
     environment:
       - RFC2136_TSIG_SECRET=${RFC2136_TSIG_SECRET}
