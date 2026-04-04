@@ -2,6 +2,18 @@ internal:53 {
     file /zones/db.internal
     log
     errors
+
+    # Accept RFC 2136 dynamic updates authenticated with TSIG
+    dynamic {
+        zones internal
+    }
+
+    tsig {
+        secret externaldns-key base64string==
+    }
+
+    log
+    errors
 }
 
 home:53 {
